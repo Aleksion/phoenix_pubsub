@@ -257,6 +257,11 @@ defmodule Phoenix.Tracker do
       name: name)
   end
 
+  def init([tracker. tracker_opts, opts]) do
+    server_name = Keyword.fetch!(opts, :name)
+    init([tracker, tracker_opts, opts, server_name])
+  end
+  
   def init([tracker, tracker_opts, opts, name]) do
     pool_size = Keyword.get(opts, :pool_size, 1)
     ^name = :ets.new(name, [:set, :named_table, read_concurrency: true])
